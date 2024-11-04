@@ -137,7 +137,9 @@
     </div>
     
     <div id="toggleDivs1" class="hidden flex flex-col mt-4">
-        <div class="bg-transparent border border-gray-300 rounded-[5%] p-2 flex items-center justify-between hover:bg-gray-100 transition mt-2">
+
+        
+        <div class="bg-transparent border border-gray-300 rounded-[5%] p-2 flex items-center justify-between hover:bg-gray-100 transition mt-2" id="inputElement">
             <div class="flex items-center space-x-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-800">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
@@ -148,6 +150,47 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
         </div>
+        
+<!-- Draggable Box -->
+<div id="draggableBox" class="hidden fixed bg-white border rounded-lg shadow-lg" style="width: 200px; height: 250px; top: 50%; left: 50%; transform: translate(-50%, -50%); cursor: move; border-color: #5585b5; border-width: 2px;">
+    <!-- Top Bar -->
+    <div class="flex items-center justify-between text-white p-2 rounded-t-lg" style="background-color: #5585b5;">
+        <div class="flex items-center space-x-2">
+            <!-- Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-800">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
+            </svg>
+            <span class="font-medium text-gray-900">Input</span>
+        </div>
+        <div class="flex items-center space-x-2">
+            <!-- Small Title "in1" -->
+            <span class=" text-sm text-gray-900">in1</span>
+            <!-- Close Button -->
+            <button id="closeButton" class="text-gray-900 hover:text-gray-200">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+   <!-- Content -->
+   <div class="p-4">
+    <textarea class="w-full h-32 p-2 border border-gray-300 rounded resize-none focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your content here..."></textarea>
+</div>
+
+<div class="flex justify-end items-center p-2 bg-gray-200 rounded-b-lg">
+    <!-- Icon in Bottom Right -->
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 1 18 3h3.75m-6 6v11.25A2.25 2.25 0 0 1 13.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V9m6 0V3m0 6L9 12m3-3 3-3" />
+    </svg>
+</div>
+
+</div>
+
+
+        
+
+
         <div class="bg-transparent border border-gray-300 rounded-[5%] p-2 flex items-center justify-between hover:bg-gray-100 transition mt-4">
             <div class="flex items-center space-x-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-800">

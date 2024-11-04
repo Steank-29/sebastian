@@ -88,3 +88,50 @@ toggleIcon3.addEventListener('click', () => {
         toggleArrowPath3.setAttribute('d', openArrowPath3);
     }
 });
+
+
+
+document.getElementById('inputElement').addEventListener('click', function () {
+    const draggableBox = document.getElementById('draggableBox');
+    draggableBox.classList.toggle('hidden'); // Toggle visibility
+
+    // Make the box draggable
+    if (!draggableBox.classList.contains('hidden')) {
+        dragElement(draggableBox);
+    }
+});
+
+// Close button functionality
+document.getElementById('closeButton').addEventListener('click', function () {
+    const draggableBox = document.getElementById('draggableBox');
+    draggableBox.classList.add('hidden'); // Hide the box
+});
+
+// Drag functionality remains the same
+function dragElement(el) {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    el.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        el.style.top = (el.offsetTop - pos2) + "px";
+        el.style.left = (el.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+}
