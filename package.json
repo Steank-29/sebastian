@@ -1,7 +1,7 @@
 {
   "name": "sebastian",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tailwindcss -i ./styles.css -o ./output.css"
