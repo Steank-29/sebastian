@@ -91,24 +91,102 @@ toggleIcon3.addEventListener('click', () => {
 
 
 
+
+// INPUT SECTION
+
+
+
 document.getElementById('inputElement').addEventListener('click', function () {
     const draggableBox = document.getElementById('draggableBox');
-    draggableBox.classList.toggle('hidden'); // Toggle visibility
+    draggableBox.classList.toggle('hidden');
 
-    // Make the box draggable
     if (!draggableBox.classList.contains('hidden')) {
         dragElement(draggableBox);
     }
 });
 
-// Close button functionality
+
+
 document.getElementById('closeButton').addEventListener('click', function () {
     const draggableBox = document.getElementById('draggableBox');
     draggableBox.classList.add('hidden'); // Hide the box
 });
 
-// Drag functionality remains the same
+
+
 function dragElement(el) {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4= 0 ;
+    el.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY,
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        el.style.top = (el.offsetTop - pos2) + "px";
+        el.style.left = (el.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+}
+
+
+function changeBoxColors() {
+    // Generate random colors in hexadecimal format
+    const randomBorderColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+    // Select the draggable box element
+    const indraggableBox = document.getElementById("indraggableBox");
+    const draggableBox = document.getElementById("draggableBox");
+
+    // Change the border color and background color
+    indraggableBox.style.borderColor = randomBorderColor;
+    draggableBox.style.borderColor = randomBorderColor;
+    indraggableBox.style.backgroundColor = randomBorderColor;
+    indraggableBox.style.borderColor = randomBorderColor;
+}
+
+
+
+
+
+
+
+// OUTPUT SECTION
+
+
+
+document.getElementById('outputElement').addEventListener('click', function () {
+    const draggableBox1 = document.getElementById('draggableBox1');
+    draggableBox1.classList.toggle('hidden');
+
+    
+    if (!move7.classList.contains('hidden')) {
+        dragElement1(draggableBox1);
+    }
+});
+
+
+
+document.getElementById('closeButton1').addEventListener('click', function () {
+    const draggableBox1 = document.getElementById('draggableBox1');
+    draggableBox1.classList.add('hidden');
+});
+
+
+function dragElement1(el) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     el.onmousedown = dragMouseDown;
 
@@ -135,3 +213,365 @@ function dragElement(el) {
         document.onmousemove = null;
     }
 }
+
+
+function changeBoxColors1() {
+    // Generate random colors in hexadecimal format
+    const randomBorderColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+    // Select the draggable box element
+    const indraggableBox = document.getElementById("indraggableBox1");
+    const draggableBox = document.getElementById("draggableBox1");
+
+    // Change the border color and background color
+    indraggableBox.style.borderColor = randomBorderColor;
+    draggableBox.style.borderColor = randomBorderColor;
+    indraggableBox.style.backgroundColor = randomBorderColor;
+    indraggableBox.style.borderColor = randomBorderColor;
+}
+
+
+
+// OPEN AI SECTION 
+
+
+document.getElementById('openaiElement').addEventListener('click', function () {
+    const draggableBox3 = document.getElementById('draggableBox3');
+    draggableBox3.classList.toggle('hidden');
+
+    if (!draggableBox3.classList.contains('hidden')) {
+        dragElement3(draggableBox3);
+    }
+});
+
+
+
+document.getElementById('closeButton3').addEventListener('click', function () {
+    const draggableBox3 = document.getElementById('draggableBox3');
+    draggableBox3.classList.add('hidden');
+});
+
+
+
+function dragElement3(el) {
+    let pos1 = 0 , pos2 = 0 , pos3 = 0 , pos4 = 0;
+    el.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.client4;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        el.style.top = (el.offsetTop - pos2) + "px";
+        el.style.left = (el.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement () {
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+}
+
+
+function changeBoxColors2() {
+    // Generate random colors in hexadecimal format
+    const randomBorderColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+    // Select the draggable box element
+    const indraggableBox = document.getElementById("indraggableBox2");
+    const draggableBox = document.getElementById("draggableBox3");
+
+    // Change the border color and background color
+    indraggableBox.style.borderColor = randomBorderColor;
+    draggableBox.style.borderColor = randomBorderColor;
+    indraggableBox.style.backgroundColor = randomBorderColor;
+    indraggableBox.style.borderColor = randomBorderColor;
+}
+
+
+
+
+
+// ANTHROPIC SECTION 
+
+
+document.getElementById('anthropicElement').addEventListener('click', function () {
+    const draggableBox4 = document.getElementById('draggableBox4');
+    draggableBox4.classList.toggle('hidden');
+
+    if (!draggableBox4.classList.contains('hidden')) {
+        dragElement4(draggableBox4);
+    }
+});
+
+
+
+document.getElementById('closeButton4').addEventListener('click', function () {
+    const draggableBox4 = document.getElementById('draggableBox4');
+    draggableBox4.classList.add('hidden');
+});
+
+
+
+function dragElement4(el) {
+    let pos1 = 0 , pos2 = 0 , pos3 = 0 , pos4 = 0;
+    el.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.client4;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        el.style.top = (el.offsetTop - pos2) + "px";
+        el.style.left = (el.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement () {
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+}
+
+
+
+
+function changeBoxColors3() {
+    // Generate random colors in hexadecimal format
+    const randomBorderColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+    // Select the draggable box element
+    const indraggableBox = document.getElementById("indraggableBox3");
+    const draggableBox = document.getElementById("draggableBox4");
+
+    // Change the border color and background color
+    indraggableBox.style.borderColor = randomBorderColor;
+    draggableBox.style.borderColor = randomBorderColor;
+    indraggableBox.style.backgroundColor = randomBorderColor;
+    indraggableBox.style.borderColor = randomBorderColor;
+}
+
+
+
+
+
+// LLAMA SECTION 
+
+
+document.getElementById('llamaElement').addEventListener('click', function () {
+    const draggableBox5 = document.getElementById('draggableBox5');
+    draggableBox5.classList.toggle('hidden');
+
+    if (!draggableBox5.classList.contains('hidden')) {
+        dragElement5(draggableBox5);
+    }
+});
+
+
+
+document.getElementById('closeButton5').addEventListener('click', function () {
+    const draggableBox5 = document.getElementById('draggableBox5');
+    draggableBox5.classList.add('hidden');
+});
+
+
+
+function dragElement5(el) {
+    let pos1 = 0 , pos2 = 0 , pos3 = 0 , pos4 = 0;
+    el.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.client4;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        el.style.top = (el.offsetTop - pos2) + "px";
+        el.style.left = (el.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement () {
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+}
+
+
+
+function changeBoxColors4() {
+    // Generate random colors in hexadecimal format
+    const randomBorderColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+    // Select the draggable box element
+    const indraggableBox = document.getElementById("indraggableBox4");
+    const draggableBox = document.getElementById("draggableBox5");
+
+    // Change the border color and background color
+    indraggableBox.style.borderColor = randomBorderColor;
+    draggableBox.style.borderColor = randomBorderColor;
+    indraggableBox.style.backgroundColor = randomBorderColor;
+    indraggableBox.style.borderColor = randomBorderColor;
+}
+
+
+// POSTGRES SECTION 
+
+
+document.getElementById('postgresElement').addEventListener('click', function () {
+    const draggableBox6 = document.getElementById('draggableBox6');
+    draggableBox6.classList.toggle('hidden');
+
+    if (!draggableBox6.classList.contains('hidden')) {
+        dragElement6(draggableBox6);
+    }
+});
+
+
+
+document.getElementById('closeButton6').addEventListener('click', function () {
+    const draggableBox6 = document.getElementById('draggableBox6');
+    draggableBox6.classList.add('hidden');
+});
+
+
+
+function dragElement6(el) {
+    let pos1 = 0 , pos2 = 0 , pos3 = 0 , pos4 = 0;
+    el.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.client4;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        el.style.top = (el.offsetTop - pos2) + "px";
+        el.style.left = (el.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement () {
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+}
+
+
+
+function changeBoxColors5() {
+    // Generate random colors in hexadecimal format
+    const randomBorderColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+    // Select the draggable box element
+    const indraggableBox = document.getElementById("indraggableBox5");
+    const draggableBox = document.getElementById("draggableBox6");
+
+    // Change the border color and background color
+    indraggableBox.style.borderColor = randomBorderColor;
+    draggableBox.style.borderColor = randomBorderColor;
+    indraggableBox.style.backgroundColor = randomBorderColor;
+    indraggableBox.style.borderColor = randomBorderColor;
+}
+
+
+
+// MYSQL SECTION 
+
+
+document.getElementById('mysqlElement').addEventListener('click', function () {
+    const draggableBox7 = document.getElementById('draggableBox7');
+    draggableBox7.classList.toggle('hidden');
+
+    if (!draggableBox7.classList.contains('hidden')) {
+        dragElement7(draggableBox7);
+    }
+});
+
+
+
+document.getElementById('closeButton7').addEventListener('click', function () {
+    const draggableBox7 = document.getElementById('draggableBox7');
+    draggableBox7.classList.add('hidden');
+});
+
+
+
+function dragElement7(el) {
+    let pos1 = 0 , pos2 = 0 , pos3 = 0 , pos4 = 0;
+    el.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.client4;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        el.style.top = (el.offsetTop - pos2) + "px";
+        el.style.left = (el.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement () {
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+}
+
+
+
+function changeBoxColors6() {
+    // Generate random colors in hexadecimal format
+    const randomBorderColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+    // Select the draggable box element
+    const indraggableBox = document.getElementById("indraggableBox6");
+    const draggableBox = document.getElementById("draggableBox7");
+
+    // Change the border color and background color
+    indraggableBox.style.borderColor = randomBorderColor;
+    draggableBox.style.borderColor = randomBorderColor;
+    indraggableBox.style.backgroundColor = randomBorderColor;
+    indraggableBox.style.borderColor = randomBorderColor;
+}
+
+
+
