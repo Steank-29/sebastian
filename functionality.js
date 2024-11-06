@@ -948,25 +948,24 @@ function changeBoxColors5() {
 
 // MYSQL SECTION 
 
-
+// Toggle visibility of draggable box when clicking on mysqlElement
 document.getElementById('mysqlElement').addEventListener('click', function () {
     const draggableBox7 = document.getElementById('draggableBox7');
     draggableBox7.classList.toggle('hidden');
 
     if (!draggableBox7.classList.contains('hidden')) {
-        dragElement7(draggableBox7);
+        dragElement7(draggableBox7); // Initialize dragging functionality
+        toggleEdgeDots(); // Enable edge dots for linking
     }
 });
 
-
-
+// Close button event to hide draggable box
 document.getElementById('closeButton7').addEventListener('click', function () {
     const draggableBox7 = document.getElementById('draggableBox7');
     draggableBox7.classList.add('hidden');
 });
 
-
-
+// Function to enable dragging and resizing for the draggable box
 function dragElement7(el) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     let isDragging = false;
@@ -980,7 +979,7 @@ function dragElement7(el) {
         }
     };
 
-    // Resizing
+    // Resizing area setup
     const resizeArea = document.createElement('div');
     resizeArea.className = 'resize-area'; // Add class for styling
     resizeArea.style.width = '20px'; // Width of the resize handle
@@ -1012,6 +1011,7 @@ function dragElement7(el) {
         el.style.cursor = 'move'; // Reset cursor
     };
 
+    // Dragging logic
     function dragMouseDown(e) {
         e.preventDefault();
         pos3 = e.clientX;
@@ -1020,6 +1020,7 @@ function dragElement7(el) {
         document.onmousemove = elementDrag;
     }
 
+    // Resizing logic
     function resizeMouseDown(e) {
         e.preventDefault();
         pos3 = e.clientX;
@@ -1028,6 +1029,7 @@ function dragElement7(el) {
         document.onmousemove = elementResize;
     }
 
+    // Update position of the element while dragging
     function elementDrag(e) {
         if (isDragging) {
             e.preventDefault();
@@ -1040,6 +1042,7 @@ function dragElement7(el) {
         }
     }
 
+    // Update size of the element while resizing
     function elementResize(e) {
         if (isResizing) {
             e.preventDefault();
@@ -1050,34 +1053,25 @@ function dragElement7(el) {
         }
     }
 
+    // Disable dragging on mouse up
     function closeDragElement() {
         isDragging = false; // Disable dragging
         document.onmouseup = null;
         document.onmousemove = null;
     }
 
+    // Disable resizing on mouse up
     function closeResizeElement() {
         isResizing = false; // Disable resizing
         document.onmouseup = null;
         document.onmousemove = null;
     }
 
+    // Check if the target is an interactive element
     function isInteractiveElement(target) {
-        // Check if the target is an input, select, or textarea
         return target.tagName === 'INPUT' || target.tagName === 'SELECT' || target.tagName === 'TEXTAREA';
     }
 }
-
-
-// Helper function to determine if the target element is interactive
-function isInteractiveElement(element) {
-    return element.tagName === 'INPUT' || element.tagName === 'SELECT' || element.tagName === 'TEXTAREA';
-}
-
-
-
-
-
 
 
 
@@ -1162,3 +1156,162 @@ let zoomLevel = 1;
             document.getElementById("draggableBox7").style.transform = `scale(${zoomLevel})`;
         }
     });
+
+
+
+// DOTS LINKING 
+
+let firstDot = null;
+    let secondDot = null;
+
+    // Select dots by ID
+    const dot1 = document.getElementById('dot1');
+    const dot2 = document.getElementById('dot2');
+    const dot3 = document.getElementById('dot3');
+    const dot4 = document.getElementById('dot4');
+    const dot5 = document.getElementById('dot5');
+    const dot6 = document.getElementById('dot6');
+    const dot7 = document.getElementById('dot7');
+    const dot8 = document.getElementById('dot8');
+    const dot9 = document.getElementById('dot9');
+    const dot10 = document.getElementById('dot10');
+    const dot11 = document.getElementById('dot11');
+    const dot12 = document.getElementById('dot12');
+    const dot13 = document.getElementById('dot13');
+    const dot14 = document.getElementById('dot14');
+    const dot15 = document.getElementById('dot15');
+    const dot16 = document.getElementById('dot16');
+    const dot17 = document.getElementById('dot17');
+    const dot18 = document.getElementById('dot18');
+    const dot19 = document.getElementById('dot19');
+    const dot20 = document.getElementById('dot20');
+    const dot21 = document.getElementById('dot21');
+    const dotContainer = document.getElementById('container');
+
+    // Add click event listener to each dot
+    dot1.addEventListener('click', function() {
+      handleDotClick(dot1);
+    });
+
+    dot2.addEventListener('click', function() {
+      handleDotClick(dot2);
+    });
+
+    dot3.addEventListener('click', function() {
+      handleDotClick(dot3);
+    });
+
+    dot4.addEventListener('click', function() {
+      handleDotClick(dot4);
+    });
+
+    dot5.addEventListener('click', function() {
+        handleDotClick(dot5);
+      });
+  
+    dot6.addEventListener('click', function() {
+    handleDotClick(dot6);
+    });
+
+    dot7.addEventListener('click', function() {
+        handleDotClick(dot7);
+      });
+  
+      dot8.addEventListener('click', function() {
+        handleDotClick(dot8);
+      });
+  
+      dot9.addEventListener('click', function() {
+        handleDotClick(dot9);
+      });
+  
+      dot10.addEventListener('click', function() {
+        handleDotClick(dot10);
+      });
+  
+      dot11.addEventListener('click', function() {
+          handleDotClick(dot11);
+        });
+    
+      dot12.addEventListener('click', function() {
+      handleDotClick(dot12);
+      });
+
+      dot13.addEventListener('click', function() {
+        handleDotClick(dot13);
+      });
+  
+      dot14.addEventListener('click', function() {
+        handleDotClick(dot14);
+      });
+  
+      dot15.addEventListener('click', function() {
+        handleDotClick(dot15);
+      });
+  
+      dot16.addEventListener('click', function() {
+        handleDotClick(dot16);
+      });
+  
+      dot17.addEventListener('click', function() {
+          handleDotClick(dot17);
+        });
+    
+      dot18.addEventListener('click', function() {
+      handleDotClick(dot18);
+      });
+
+      dot19.addEventListener('click', function() {
+        handleDotClick(dot19);
+      });
+  
+      dot20.addEventListener('click', function() {
+          handleDotClick(dot20);
+        });
+    
+      dot21.addEventListener('click', function() {
+      handleDotClick(dot21);
+      });
+
+
+
+    // Function to handle dot click and draw line
+    function handleDotClick(dot) {
+      if (!firstDot) {
+        firstDot = dot;
+      } else if (!secondDot) {
+        secondDot = dot;
+        drawLine(firstDot, secondDot);
+        firstDot = null;
+        secondDot = null;
+      }
+    }
+
+    // Function to draw a line between two dots
+    function drawLine(dot1, dot2) {
+        const dot1Position = dot1.getBoundingClientRect();
+        const dot2Position = dot2.getBoundingClientRect();
+  
+        const x1 = dot1Position.left + dot1Position.width / 2;
+        const y1 = dot1Position.top + dot1Position.height / 2;
+        const x2 = dot2Position.left + dot2Position.width / 2;
+        const y2 = dot2Position.top + dot2Position.height / 2;
+  
+        const deltaX = x2 - x1;
+        const deltaY = y2 - y1;
+        const length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+  
+        const line = document.createElement('div');
+        line.style.position = 'absolute';
+        line.style.height = '2px';
+        line.style.backgroundColor = 'black';
+        line.style.zIndex = '1';
+        line.style.width = length + 'px';
+        line.style.transform = `rotate(${angle}deg)`;
+        line.style.left = `${x1}px`;
+        line.style.top = `${y1}px`;
+  
+
+      dotContainer.appendChild(line);
+    }
