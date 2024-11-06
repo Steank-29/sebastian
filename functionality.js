@@ -1142,6 +1142,7 @@ let zoomLevel = 1;
         document.getElementById("draggableBox5").style.transform = `scale(${zoomLevel})`;
         document.getElementById("draggableBox6").style.transform = `scale(${zoomLevel})`;
         document.getElementById("draggableBox7").style.transform = `scale(${zoomLevel})`;
+        document.getElementById("draggableBox8").style.transform = `scale(${zoomLevel})`;
     });
 
     document.getElementById("zoomOutButton").addEventListener("click", function () {
@@ -1154,6 +1155,7 @@ let zoomLevel = 1;
             document.getElementById("draggableBox5").style.transform = `scale(${zoomLevel})`;
             document.getElementById("draggableBox6").style.transform = `scale(${zoomLevel})`;
             document.getElementById("draggableBox7").style.transform = `scale(${zoomLevel})`;
+            document.getElementById("draggableBox8").style.transform = `scale(${zoomLevel})`;
         }
     });
 
