@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sebastian</title>
   <link href="output.css" rel="stylesheet">
+  <script src="node_modules/html2canvas/dist/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 </head>
-<body class="bg-dot-pattern bg-repeat bg-gray-50">
+<body class="bg-dot-pattern bg-repeat ">
 
 
   <nav class="bg-white p-4 flex justify-between items-center border-b border-gray-300 fixed top-0 left-0 w-full z-10">
@@ -15,7 +18,7 @@
     <div class="flex space-x-6">
 
       <div class="group relative flex flex-col items-center">
-        <button class="text-gray-500 group-hover:text-blue-500 focus:outline-none">
+        <button id="screenshotButton" class="text-gray-500 group-hover:text-blue-500 focus:outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
               </svg>              
@@ -54,7 +57,7 @@
   
 
 
-  <div id="sidebar" class="fixed left-0 top-0 h-full w-16 bg-gray-800 flex flex-col items-center space-y-8 py-4 z-20">
+  <div id="sidebar" class="fixed left-0 top-0 h-full w-16 bg-gray-800 flex flex-col items-center space-y-8 py-2 z-20">
     
     <div class="flex items-center">
         <img src="/LOGO.png" alt="Logo" class="w-10 h-10 "> 
@@ -106,7 +109,7 @@
   </div>
   
 <div class="flex h-screen">
-  <div class="bg-white w-[18%] h-full p-4 border-r border-gray-300 ml-16 mt-14 overflow-y-auto" style="-ms-overflow-style: none; scrollbar-width: none;" id="childbar">
+  <div class="bg-white w-[18%] p-4 border-r border-gray-300 ml-16 mt-14 overflow-y-auto" style="-ms-overflow-style: none; scrollbar-width: none;" id="childbar">
     <style>
         /* Hide scrollbar for Chrome, Safari, and Opera */
         #sidebar::-webkit-scrollbar {
@@ -164,9 +167,10 @@
 
         
 <!-- Draggable Box -->
-<div id="draggableBox" class="hidden fixed bg-white border rounded-lg shadow-lg resize overflow-auto focus:outline-none" style="width: 200px; height: 250px; top: 40%; left: 40%; transform: translate(-50%, -50%); cursor: move; border-color: #8dc6ff;">
+<div id="draggableBox" class="hidden fixed bg-white border rounded-lg shadow-lg" style="width: 200px; height: 250px; top: 40%; left: 40%; transform: translate(-50%, -50%); cursor: move; border-color: #8dc6ff;">
     <!-- Top Bar -->
-    <div id="indraggableBox" class="flex items-center justify-between text-white p-2 rounded-t-lg" style="background-color: #8dc6ff;">
+    <div class="draggable-area" style="width: 100%; height: 100%; position: relative;">
+    <div id="indraggableBox" class="flex items-center justify-between text-white p-2 rounded-t-lg " style="background-color: #8dc6ff;">
         <div class="flex items-center space-x-2">
             <!-- Icon -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-800">
@@ -205,6 +209,7 @@
 </div>
 
 </div>
+</div>
 
 
         
@@ -222,8 +227,9 @@
             </svg>
         </div>
 
-        <div id="draggableBox1" class="hidden fixed bg-white border rounded-lg shadow-lg resize overflow-auto focus:outline-none" style="width: 200px; height: 250px; top: 50%; left: 50%; transform: translate(-50%, -50%); cursor: move; border-color: #8dc6ff; border-width: 2px;">
+        <div id="draggableBox1" class="hidden fixed bg-white border rounded-lg shadow-lg" style="width: 200px; height: 250px; top: 50%; left: 50%; transform: translate(-50%, -50%); cursor: move; border-color: #8dc6ff; border-width: 2px;">
             <!-- Top Bar -->
+            <div class="draggable-area" style="width: 100%; height: 100%; position: relative;">
             <div id="indraggableBox1" class="flex items-center justify-between text-white p-2 rounded-t-lg" style="background-color: #8dc6ff;">
                 <div class="flex items-center space-x-2">
                     <!-- Icon -->
@@ -262,7 +268,7 @@
         </div>
         
         </div>
-
+        </div>
 
 
         </div>
@@ -299,8 +305,9 @@
             </svg>
         </div>
 
-        <div  id="draggableBox3" class="hidden fixed bg-white border rounded-lg shadow-lg resize overflow-auto focus:outline-none" style="width: 350px; height: 551px; top: 60%; left: 60%; transform: translate(-50%, -50%); cursor: move; border-color: #09b642; border-width: 2px;">
+        <div  id="draggableBox3" class="hidden fixed bg-white border rounded-lg shadow-lg" style="width: 350px; height: 551px; top: 60%; left: 60%; transform: translate(-50%, -50%); cursor: move; border-color: #09b642; border-width: 2px;">
             <!-- Top Bar -->
+            <div class="draggable-area" style="width: 100%; height: 100%; position: relative;">
             <div id="indraggableBox2" class="flex items-center justify-between text-white p-2 rounded-t-lg" style="background-color: #09b642;">
                 <div class="flex items-center space-x-2">
                     <img src="/openai.png" alt="OpenAI Logo" class="w-6 h-6">
@@ -368,16 +375,7 @@
         
         </div>
 
-
-
-
-
-
-
-
-
-
-
+        </div>
 
 
 
@@ -389,7 +387,7 @@
 
         <div class="bg-transparent w-[85%] ml-4 border border-gray-300 rounded-[5%] p-2 flex items-center justify-between hover:bg-gray-100 transition mt-4" id="anthropicElement">
             <div class="flex items-center space-x-2">
-                <img src="https://www.anthropic.com/favicon.ico" alt="Anthropic Logo" class="w-6 h-6">
+                <img src="/anthropic.png" alt="Anthropic Logo" class="w-6 h-6">
             </div>
             <span class="text-gray-900 text-sm font-medium text-center mr-10">Anthropic</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-800">
@@ -401,11 +399,12 @@
 
 
 
-        <div  id="draggableBox4" class="hidden fixed bg-white border rounded-lg shadow-lg resize overflow-auto focus:outline-none" style="width: 350px; height: 551px; top: 80%; left: 80%; transform: translate(-50%, -50%); cursor: move; border-color: #b68b09; border-width: 2px;">
+        <div  id="draggableBox4" class="hidden fixed bg-white border rounded-lg shadow-lg" style="width: 350px; height: 551px; top: 80%; left: 80%; transform: translate(-50%, -50%); cursor: move; border-color: #b68b09; border-width: 2px;">
             <!-- Top Bar -->
+            <div class="draggable-area" style="width: 100%; height: 100%; position: relative;">
             <div id="indraggableBox3" class="flex items-center justify-between text-white p-2 rounded-t-lg" style="background-color: #b68b09;">
                 <div class="flex items-center space-x-2">
-                    <img src="https://www.anthropic.com/favicon.ico" alt="Anthropic Logo" class="w-6 h-6">
+                    <img src="/anthropic.png" alt="Anthropic Logo" class="w-6 h-6">
                     <span class="font-medium text-gray-900">Anthropic</span>
                 </div>
                 <div class="flex items-center space-x-2">
@@ -468,8 +467,7 @@
         </div>
         
         </div>
-
-
+        </div>
 
 
 
@@ -498,8 +496,9 @@
         </div>
 
 
-        <div  id="draggableBox5" class="hidden fixed bg-white border rounded-lg shadow-lg resize overflow-auto focus:outline-none" style="width: 350px; height: 551px; top: 30%; left: 30%; transform: translate(-50%, -50%); cursor: move; border-color: #b609b3; border-width: 2px;">
+        <div  id="draggableBox5" class="hidden fixed bg-white border rounded-lg shadow-lg" style="width: 350px; height: 551px; top: 30%; left: 30%; transform: translate(-50%, -50%); cursor: move; border-color: #b609b3; border-width: 2px;">
             <!-- Top Bar -->
+            <div class="draggable-area" style="width: 100%; height: 100%; position: relative;">
             <div id="indraggableBox4" class="flex items-center justify-between text-white p-2 rounded-t-lg" style="background-color: #b609b3;">
                 <div class="flex items-center space-x-2">
                     <img src="/llama.png" alt="Llama Logo" class="w-6 h-6">
@@ -565,29 +564,9 @@
         </div>
         
         </div>
-
-
-
+        </div>
 
     </div>
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    
 
 
       <div id="toggleIcon2" class="bg-transparent p-2 flex items-center justify-between hover:bg-gray-100 transition mt-4">
@@ -735,14 +714,15 @@
     <div class="flex items-center space-x-2">
         <img src="/postgres.png" alt="LLaMA AI Logo" class="w-6 h-6">
     </div>
-    <span class="text-gray-900 text-sm font-meduim text-center mr-10">Postgres</span>
+    <span class="text-gray-900 text-sm font-semibold text-center mr-10">Postgres</span>
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-800">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
       </svg>
    </div> 
 
-   <div id="draggableBox6" class="hidden fixed bg-white border rounded-lg shadow-lg resize overflow-auto focus:outline-none" style="width: 210px; height: 185px; top: 75%; left: 40%; transform: translate(-50%, -50%); cursor: move; border-color: #e840b0; border-width: 2px;">
+   <div id="draggableBox6" class="hidden fixed bg-white border rounded-lg shadow-lg" style="width: 210px; height: 185px; top: 75%; left: 40%; transform: translate(-50%, -50%); cursor: move; border-color: #e840b0; border-width: 2px;">
     <!-- Top Bar -->
+    <div class="draggable-area" style="width: 100%; height: 100%; position: relative;"> <!-- Use relative positioning here -->
     <div id="indraggableBox5" class="flex items-center justify-between text-white p-2 rounded-t-lg" style="background-color: #e840b0;">
         <div class="flex items-center space-x-2">
             <img src="/postgres.png" alt="LLaMA AI Logo" class="w-6 h-6">
@@ -790,6 +770,8 @@
 
 </div>
 
+</div>
+
 
 
 
@@ -802,7 +784,7 @@
     <div class="flex items-center space-x-2">
         <img src="/mysql.png" alt="LLaMA AI Logo" class="w-6 h-6">
     </div>
-    <span class="text-gray-900 text-sm font-meduim text-center mr-10">MySQL</span>
+    <span class="text-gray-900 text-sm font-semibold text-center mr-10">MySQL</span>
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-800">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
       </svg>
@@ -810,54 +792,48 @@
 
 
 
-   <div id="draggableBox7" class="hidden fixed bg-white border rounded-lg shadow-lg resize overflow-auto focus:outline-none" style="width: 210px; height: 185px; top: 30%; left: 65%; transform: translate(-50%, -50%); cursor: move; border-color: #a5ac17; border-width: 2px;">
-    <!-- Top Bar -->
-    <div id="indraggableBox6" class="flex items-center justify-between text-white p-2 rounded-t-lg" style="background-color: #a5ac17;">
-        <div class="flex items-center space-x-2">
-            <img src="/mysql.png" alt="MySQL Logo" class="w-6 h-6">
-            <span  class="font-medium text-gray-900">MySQL</span>
+   <div id="draggableBox7" class="hidden fixed bg-white border rounded-lg shadow-lg" style="width: 210px; height: 185px; top: 30%; left: 65%; transform: translate(-50%, -50%); border-color: #a5ac17; border-width: 2px;">
+    <div class="draggable-area" style="width: 100%; height: 100%; position: relative;"> <!-- Use relative positioning here -->
+        <!-- Top Bar -->
+        <div id="indraggableBox6" class="flex items-center justify-between text-white p-2 rounded-t-lg" style="background-color: #a5ac17;">
+            <div class="flex items-center space-x-2">
+                <img src="/mysql.png" alt="MySQL Logo" class="w-6 h-6">
+                <span class="font-medium text-gray-900">MySQL</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <span class="text-sm text-gray-900 ">db</span>
+                <button onclick="changeBoxColors6()" class="text-gray-900 hover:text-gray-200 ">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                    </svg>           
+                </button>         
+                <button id="closeButton7" class="text-gray-900 hover:text-gray-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />                     
+                    </svg>
+                </button>
+            </div>
         </div>
-        <div class="flex items-center space-x-2">
-            <!-- Small Title "in1" -->
-            <span class=" text-sm text-gray-900">db</span>
-            <!-- Close Button --> 
-            <button onclick="changeBoxColors6()" class="text-gray-900 hover:text-gray-200 ">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
-                </svg>           
-            </button>               
-            <button id="closeButton7" class="text-gray-900 hover:text-gray-200">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />                     
-                </svg>
-            </button>
+        <!-- Content -->
+        <div class="p-4">
+            <h2 class="text-sm font-semibold text-gray-800 mb-2">Database</h2>
+            <select class="w-full p-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="db">Select Database</option>
+                <option value="db1">Diamond</option>
+                <option value="db2">Gold</option>
+                <option value="db3">Silver</option>
+                <option value="db4">Bronze</option>
+            </select>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 flex justify-end items-center h-10 bg-gray-200 rounded-b-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 0 1 1.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.559.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.894.149c-.424.07-.764.383-.929.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 0 1-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.398.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 0 1-.12-1.45l.527-.737c.25-.35.272-.806.108-1.204-.165-.397-.506-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.108-1.204l-.526-.738a1.125 1.125 0 0 1 .12-1.45l.773-.773a1.125 1.125 0 0 1 1.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /> 
+            </svg>
         </div>
     </div>
-            <!-- Content -->
-    <div class="p-4">
-        <!-- Title: Model -->
-        <h2 class="text-sm font-semibold text-gray-800 mb-2">Database</h2>
-        
-        <!-- Select List -->
-        <select class="w-full p-1 mb-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option value="model2">Select Database</option>
-            <option value="model1">Select Database</option>
-        </select>
-
-    </div>
-
-    
-
-
-<div class="absolute bottom-0 left-0 right-0 flex justify-end items-center h-10 bg-gray-200 rounded-b-lg">
-    <!-- Icon in Bottom Right -->
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600 mr-2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 0 1 1.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.559.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.894.149c-.424.07-.764.383-.929.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 0 1-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.398.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 0 1-.12-1.45l.527-.737c.25-.35.272-.806.108-1.204-.165-.397-.506-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.108-1.204l-.526-.738a1.125 1.125 0 0 1 .12-1.45l.773-.773a1.125 1.125 0 0 1 1.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894Z" />
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /> 
-    </svg>
 </div>
 
-</div>  
 
 
 
@@ -881,29 +857,30 @@
   <div class="flex flex-col items-center justify-between">
     <div class="fixed bottom-0 ml-10 mb-4 bg-white w-6 h-24 flex flex-col items-center justify-between p-1">
         <!-- Plus Button -->
-        <button class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-100 focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <button id="zoomInButton" class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-100 focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
             </svg>
         </button>
+        
 
         <!-- Minus Button -->
-        <button class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-100 focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <button id="zoomOutButton" class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-100 focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
             </svg>
         </button>
 
         <!-- Arrows Pointing Out Button -->
         <button class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-100 focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black-900" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
             </svg>              
         </button>
 
         <!-- Lock Button -->
         <button class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-100 focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black-900" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
             </svg>              
         </button>
@@ -936,6 +913,6 @@
 
 
   
-  <script src="functionality.js"></script>
+  <script src="functionality.js" defer></script>
 </body>
 </html>

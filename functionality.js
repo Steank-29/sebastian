@@ -115,30 +115,103 @@ document.getElementById('closeButton').addEventListener('click', function () {
 
 
 function dragElement(el) {
-    let pos1 = 0, pos2 = 0, pos3 = 0, pos4= 0 ;
-    el.onmousedown = dragMouseDown;
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    let isDragging = false;
+    let isResizing = false;
+
+    // Allow dragging only when clicking on the header or an area that is not interactive
+    el.onmousedown = (e) => {
+        if (!isInteractiveElement(e.target) && !isResizing) {
+            isDragging = true;  // Enable dragging
+            dragMouseDown(e);
+        }
+    };
+
+    // Resizing
+    const resizeArea = document.createElement('div');
+    resizeArea.className = 'resize-area'; // Add class for styling
+    resizeArea.style.width = '20px'; // Width of the resize handle
+    resizeArea.style.height = '20px'; // Height of the resize handle
+    resizeArea.style.position = 'absolute';
+    resizeArea.style.bottom = '-10px'; // Move it outside the box
+    resizeArea.style.right = '-10px'; // Move it outside the box
+    resizeArea.style.cursor = 'nwse-resize';
+    el.appendChild(resizeArea);
+
+    resizeArea.onmousedown = (e) => {
+        isResizing = true; // Enable resizing
+        e.stopPropagation(); // Prevent the drag event from firing
+        resizeMouseDown(e);
+    };
+
+    // Disable dragging when mouse is over the resize area
+    el.onmouseover = (e) => {
+        if (isInteractiveElement(e.target)) {
+            el.style.cursor = 'default'; // Set cursor to default for inputs
+        } else if (e.target === resizeArea) {
+            el.style.cursor = 'nwse-resize'; // Change cursor to resize
+        } else {
+            el.style.cursor = 'move'; // Change cursor to move
+        }
+    };
+
+    el.onmouseout = () => {
+        el.style.cursor = 'move'; // Reset cursor
+    };
 
     function dragMouseDown(e) {
         e.preventDefault();
         pos3 = e.clientX;
-        pos4 = e.clientY,
+        pos4 = e.clientY;
         document.onmouseup = closeDragElement;
         document.onmousemove = elementDrag;
     }
 
-    function elementDrag(e) {
+    function resizeMouseDown(e) {
         e.preventDefault();
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
         pos3 = e.clientX;
         pos4 = e.clientY;
-        el.style.top = (el.offsetTop - pos2) + "px";
-        el.style.left = (el.offsetLeft - pos1) + "px";
+        document.onmouseup = closeResizeElement;
+        document.onmousemove = elementResize;
+    }
+
+    function elementDrag(e) {
+        if (isDragging) {
+            e.preventDefault();
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            el.style.top = (el.offsetTop - pos2) + "px";
+            el.style.left = (el.offsetLeft - pos1) + "px";
+        }
+    }
+
+    function elementResize(e) {
+        if (isResizing) {
+            e.preventDefault();
+            const newWidth = e.clientX - el.getBoundingClientRect().left + 10; // Added 10 for offset
+            const newHeight = e.clientY - el.getBoundingClientRect().top + 10; // Added 10 for offset
+            el.style.width = newWidth + 'px';
+            el.style.height = newHeight + 'px';
+        }
     }
 
     function closeDragElement() {
+        isDragging = false; // Disable dragging
         document.onmouseup = null;
         document.onmousemove = null;
+    }
+
+    function closeResizeElement() {
+        isResizing = false; // Disable resizing
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+
+    function isInteractiveElement(target) {
+        // Check if the target is an input, select, or textarea
+        return target.tagName === 'INPUT' || target.tagName === 'SELECT' || target.tagName === 'TEXTAREA';
     }
 }
 
@@ -173,7 +246,7 @@ document.getElementById('outputElement').addEventListener('click', function () {
     draggableBox1.classList.toggle('hidden');
 
     
-    if (!move7.classList.contains('hidden')) {
+    if (!draggableBox1.classList.contains('hidden')) {
         dragElement1(draggableBox1);
     }
 });
@@ -188,7 +261,48 @@ document.getElementById('closeButton1').addEventListener('click', function () {
 
 function dragElement1(el) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    el.onmousedown = dragMouseDown;
+    let isDragging = false;
+    let isResizing = false;
+
+    // Allow dragging only when clicking on the header or an area that is not interactive
+    el.onmousedown = (e) => {
+        if (!isInteractiveElement(e.target) && !isResizing) {
+            isDragging = true;  // Enable dragging
+            dragMouseDown(e);
+        }
+    };
+
+    // Resizing
+    const resizeArea = document.createElement('div');
+    resizeArea.className = 'resize-area'; // Add class for styling
+    resizeArea.style.width = '20px'; // Width of the resize handle
+    resizeArea.style.height = '20px'; // Height of the resize handle
+    resizeArea.style.position = 'absolute';
+    resizeArea.style.bottom = '-10px'; // Move it outside the box
+    resizeArea.style.right = '-10px'; // Move it outside the box
+    resizeArea.style.cursor = 'nwse-resize';
+    el.appendChild(resizeArea);
+
+    resizeArea.onmousedown = (e) => {
+        isResizing = true; // Enable resizing
+        e.stopPropagation(); // Prevent the drag event from firing
+        resizeMouseDown(e);
+    };
+
+    // Disable dragging when mouse is over the resize area
+    el.onmouseover = (e) => {
+        if (isInteractiveElement(e.target)) {
+            el.style.cursor = 'default'; // Set cursor to default for inputs
+        } else if (e.target === resizeArea) {
+            el.style.cursor = 'nwse-resize'; // Change cursor to resize
+        } else {
+            el.style.cursor = 'move'; // Change cursor to move
+        }
+    };
+
+    el.onmouseout = () => {
+        el.style.cursor = 'move'; // Reset cursor
+    };
 
     function dragMouseDown(e) {
         e.preventDefault();
@@ -198,19 +312,51 @@ function dragElement1(el) {
         document.onmousemove = elementDrag;
     }
 
-    function elementDrag(e) {
+    function resizeMouseDown(e) {
         e.preventDefault();
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
         pos3 = e.clientX;
         pos4 = e.clientY;
-        el.style.top = (el.offsetTop - pos2) + "px";
-        el.style.left = (el.offsetLeft - pos1) + "px";
+        document.onmouseup = closeResizeElement;
+        document.onmousemove = elementResize;
+    }
+
+    function elementDrag(e) {
+        if (isDragging) {
+            e.preventDefault();
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            el.style.top = (el.offsetTop - pos2) + "px";
+            el.style.left = (el.offsetLeft - pos1) + "px";
+        }
+    }
+
+    function elementResize(e) {
+        if (isResizing) {
+            e.preventDefault();
+            const newWidth = e.clientX - el.getBoundingClientRect().left + 10; // Added 10 for offset
+            const newHeight = e.clientY - el.getBoundingClientRect().top + 10; // Added 10 for offset
+            el.style.width = newWidth + 'px';
+            el.style.height = newHeight + 'px';
+        }
     }
 
     function closeDragElement() {
+        isDragging = false; // Disable dragging
         document.onmouseup = null;
         document.onmousemove = null;
+    }
+
+    function closeResizeElement() {
+        isResizing = false; // Disable resizing
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+
+    function isInteractiveElement(target) {
+        // Check if the target is an input, select, or textarea
+        return target.tagName === 'INPUT' || target.tagName === 'SELECT' || target.tagName === 'TEXTAREA';
     }
 }
 
@@ -254,30 +400,103 @@ document.getElementById('closeButton3').addEventListener('click', function () {
 
 
 function dragElement3(el) {
-    let pos1 = 0 , pos2 = 0 , pos3 = 0 , pos4 = 0;
-    el.onmousedown = dragMouseDown;
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    let isDragging = false;
+    let isResizing = false;
+
+    // Allow dragging only when clicking on the header or an area that is not interactive
+    el.onmousedown = (e) => {
+        if (!isInteractiveElement(e.target) && !isResizing) {
+            isDragging = true;  // Enable dragging
+            dragMouseDown(e);
+        }
+    };
+
+    // Resizing
+    const resizeArea = document.createElement('div');
+    resizeArea.className = 'resize-area'; // Add class for styling
+    resizeArea.style.width = '20px'; // Width of the resize handle
+    resizeArea.style.height = '20px'; // Height of the resize handle
+    resizeArea.style.position = 'absolute';
+    resizeArea.style.bottom = '-10px'; // Move it outside the box
+    resizeArea.style.right = '-10px'; // Move it outside the box
+    resizeArea.style.cursor = 'nwse-resize';
+    el.appendChild(resizeArea);
+
+    resizeArea.onmousedown = (e) => {
+        isResizing = true; // Enable resizing
+        e.stopPropagation(); // Prevent the drag event from firing
+        resizeMouseDown(e);
+    };
+
+    // Disable dragging when mouse is over the resize area
+    el.onmouseover = (e) => {
+        if (isInteractiveElement(e.target)) {
+            el.style.cursor = 'default'; // Set cursor to default for inputs
+        } else if (e.target === resizeArea) {
+            el.style.cursor = 'nwse-resize'; // Change cursor to resize
+        } else {
+            el.style.cursor = 'move'; // Change cursor to move
+        }
+    };
+
+    el.onmouseout = () => {
+        el.style.cursor = 'move'; // Reset cursor
+    };
 
     function dragMouseDown(e) {
         e.preventDefault();
         pos3 = e.clientX;
-        pos4 = e.client4;
+        pos4 = e.clientY;
         document.onmouseup = closeDragElement;
         document.onmousemove = elementDrag;
     }
 
-    function elementDrag(e) {
+    function resizeMouseDown(e) {
         e.preventDefault();
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
         pos3 = e.clientX;
         pos4 = e.clientY;
-        el.style.top = (el.offsetTop - pos2) + "px";
-        el.style.left = (el.offsetLeft - pos1) + "px";
+        document.onmouseup = closeResizeElement;
+        document.onmousemove = elementResize;
     }
 
-    function closeDragElement () {
+    function elementDrag(e) {
+        if (isDragging) {
+            e.preventDefault();
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            el.style.top = (el.offsetTop - pos2) + "px";
+            el.style.left = (el.offsetLeft - pos1) + "px";
+        }
+    }
+
+    function elementResize(e) {
+        if (isResizing) {
+            e.preventDefault();
+            const newWidth = e.clientX - el.getBoundingClientRect().left + 10; // Added 10 for offset
+            const newHeight = e.clientY - el.getBoundingClientRect().top + 10; // Added 10 for offset
+            el.style.width = newWidth + 'px';
+            el.style.height = newHeight + 'px';
+        }
+    }
+
+    function closeDragElement() {
+        isDragging = false; // Disable dragging
         document.onmouseup = null;
         document.onmousemove = null;
+    }
+
+    function closeResizeElement() {
+        isResizing = false; // Disable resizing
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+
+    function isInteractiveElement(target) {
+        // Check if the target is an input, select, or textarea
+        return target.tagName === 'INPUT' || target.tagName === 'SELECT' || target.tagName === 'TEXTAREA';
     }
 }
 
@@ -323,30 +542,103 @@ document.getElementById('closeButton4').addEventListener('click', function () {
 
 
 function dragElement4(el) {
-    let pos1 = 0 , pos2 = 0 , pos3 = 0 , pos4 = 0;
-    el.onmousedown = dragMouseDown;
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    let isDragging = false;
+    let isResizing = false;
+
+    // Allow dragging only when clicking on the header or an area that is not interactive
+    el.onmousedown = (e) => {
+        if (!isInteractiveElement(e.target) && !isResizing) {
+            isDragging = true;  // Enable dragging
+            dragMouseDown(e);
+        }
+    };
+
+    // Resizing
+    const resizeArea = document.createElement('div');
+    resizeArea.className = 'resize-area'; // Add class for styling
+    resizeArea.style.width = '20px'; // Width of the resize handle
+    resizeArea.style.height = '20px'; // Height of the resize handle
+    resizeArea.style.position = 'absolute';
+    resizeArea.style.bottom = '-10px'; // Move it outside the box
+    resizeArea.style.right = '-10px'; // Move it outside the box
+    resizeArea.style.cursor = 'nwse-resize';
+    el.appendChild(resizeArea);
+
+    resizeArea.onmousedown = (e) => {
+        isResizing = true; // Enable resizing
+        e.stopPropagation(); // Prevent the drag event from firing
+        resizeMouseDown(e);
+    };
+
+    // Disable dragging when mouse is over the resize area
+    el.onmouseover = (e) => {
+        if (isInteractiveElement(e.target)) {
+            el.style.cursor = 'default'; // Set cursor to default for inputs
+        } else if (e.target === resizeArea) {
+            el.style.cursor = 'nwse-resize'; // Change cursor to resize
+        } else {
+            el.style.cursor = 'move'; // Change cursor to move
+        }
+    };
+
+    el.onmouseout = () => {
+        el.style.cursor = 'move'; // Reset cursor
+    };
 
     function dragMouseDown(e) {
         e.preventDefault();
         pos3 = e.clientX;
-        pos4 = e.client4;
+        pos4 = e.clientY;
         document.onmouseup = closeDragElement;
         document.onmousemove = elementDrag;
     }
 
-    function elementDrag(e) {
+    function resizeMouseDown(e) {
         e.preventDefault();
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
         pos3 = e.clientX;
         pos4 = e.clientY;
-        el.style.top = (el.offsetTop - pos2) + "px";
-        el.style.left = (el.offsetLeft - pos1) + "px";
+        document.onmouseup = closeResizeElement;
+        document.onmousemove = elementResize;
     }
 
-    function closeDragElement () {
+    function elementDrag(e) {
+        if (isDragging) {
+            e.preventDefault();
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            el.style.top = (el.offsetTop - pos2) + "px";
+            el.style.left = (el.offsetLeft - pos1) + "px";
+        }
+    }
+
+    function elementResize(e) {
+        if (isResizing) {
+            e.preventDefault();
+            const newWidth = e.clientX - el.getBoundingClientRect().left + 10; // Added 10 for offset
+            const newHeight = e.clientY - el.getBoundingClientRect().top + 10; // Added 10 for offset
+            el.style.width = newWidth + 'px';
+            el.style.height = newHeight + 'px';
+        }
+    }
+
+    function closeDragElement() {
+        isDragging = false; // Disable dragging
         document.onmouseup = null;
         document.onmousemove = null;
+    }
+
+    function closeResizeElement() {
+        isResizing = false; // Disable resizing
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+
+    function isInteractiveElement(target) {
+        // Check if the target is an input, select, or textarea
+        return target.tagName === 'INPUT' || target.tagName === 'SELECT' || target.tagName === 'TEXTAREA';
     }
 }
 
@@ -394,30 +686,103 @@ document.getElementById('closeButton5').addEventListener('click', function () {
 
 
 function dragElement5(el) {
-    let pos1 = 0 , pos2 = 0 , pos3 = 0 , pos4 = 0;
-    el.onmousedown = dragMouseDown;
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    let isDragging = false;
+    let isResizing = false;
+
+    // Allow dragging only when clicking on the header or an area that is not interactive
+    el.onmousedown = (e) => {
+        if (!isInteractiveElement(e.target) && !isResizing) {
+            isDragging = true;  // Enable dragging
+            dragMouseDown(e);
+        }
+    };
+
+    // Resizing
+    const resizeArea = document.createElement('div');
+    resizeArea.className = 'resize-area'; // Add class for styling
+    resizeArea.style.width = '20px'; // Width of the resize handle
+    resizeArea.style.height = '20px'; // Height of the resize handle
+    resizeArea.style.position = 'absolute';
+    resizeArea.style.bottom = '-10px'; // Move it outside the box
+    resizeArea.style.right = '-10px'; // Move it outside the box
+    resizeArea.style.cursor = 'nwse-resize';
+    el.appendChild(resizeArea);
+
+    resizeArea.onmousedown = (e) => {
+        isResizing = true; // Enable resizing
+        e.stopPropagation(); // Prevent the drag event from firing
+        resizeMouseDown(e);
+    };
+
+    // Disable dragging when mouse is over the resize area
+    el.onmouseover = (e) => {
+        if (isInteractiveElement(e.target)) {
+            el.style.cursor = 'default'; // Set cursor to default for inputs
+        } else if (e.target === resizeArea) {
+            el.style.cursor = 'nwse-resize'; // Change cursor to resize
+        } else {
+            el.style.cursor = 'move'; // Change cursor to move
+        }
+    };
+
+    el.onmouseout = () => {
+        el.style.cursor = 'move'; // Reset cursor
+    };
 
     function dragMouseDown(e) {
         e.preventDefault();
         pos3 = e.clientX;
-        pos4 = e.client4;
+        pos4 = e.clientY;
         document.onmouseup = closeDragElement;
         document.onmousemove = elementDrag;
     }
 
-    function elementDrag(e) {
+    function resizeMouseDown(e) {
         e.preventDefault();
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
         pos3 = e.clientX;
         pos4 = e.clientY;
-        el.style.top = (el.offsetTop - pos2) + "px";
-        el.style.left = (el.offsetLeft - pos1) + "px";
+        document.onmouseup = closeResizeElement;
+        document.onmousemove = elementResize;
     }
 
-    function closeDragElement () {
+    function elementDrag(e) {
+        if (isDragging) {
+            e.preventDefault();
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            el.style.top = (el.offsetTop - pos2) + "px";
+            el.style.left = (el.offsetLeft - pos1) + "px";
+        }
+    }
+
+    function elementResize(e) {
+        if (isResizing) {
+            e.preventDefault();
+            const newWidth = e.clientX - el.getBoundingClientRect().left + 10; // Added 10 for offset
+            const newHeight = e.clientY - el.getBoundingClientRect().top + 10; // Added 10 for offset
+            el.style.width = newWidth + 'px';
+            el.style.height = newHeight + 'px';
+        }
+    }
+
+    function closeDragElement() {
+        isDragging = false; // Disable dragging
         document.onmouseup = null;
         document.onmousemove = null;
+    }
+
+    function closeResizeElement() {
+        isResizing = false; // Disable resizing
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+
+    function isInteractiveElement(target) {
+        // Check if the target is an input, select, or textarea
+        return target.tagName === 'INPUT' || target.tagName === 'SELECT' || target.tagName === 'TEXTAREA';
     }
 }
 
@@ -461,32 +826,106 @@ document.getElementById('closeButton6').addEventListener('click', function () {
 
 
 function dragElement6(el) {
-    let pos1 = 0 , pos2 = 0 , pos3 = 0 , pos4 = 0;
-    el.onmousedown = dragMouseDown;
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    let isDragging = false;
+    let isResizing = false;
+
+    // Allow dragging only when clicking on the header or an area that is not interactive
+    el.onmousedown = (e) => {
+        if (!isInteractiveElement(e.target) && !isResizing) {
+            isDragging = true;  // Enable dragging
+            dragMouseDown(e);
+        }
+    };
+
+    // Resizing
+    const resizeArea = document.createElement('div');
+    resizeArea.className = 'resize-area'; // Add class for styling
+    resizeArea.style.width = '20px'; // Width of the resize handle
+    resizeArea.style.height = '20px'; // Height of the resize handle
+    resizeArea.style.position = 'absolute';
+    resizeArea.style.bottom = '-10px'; // Move it outside the box
+    resizeArea.style.right = '-10px'; // Move it outside the box
+    resizeArea.style.cursor = 'nwse-resize';
+    el.appendChild(resizeArea);
+
+    resizeArea.onmousedown = (e) => {
+        isResizing = true; // Enable resizing
+        e.stopPropagation(); // Prevent the drag event from firing
+        resizeMouseDown(e);
+    };
+
+    // Disable dragging when mouse is over the resize area
+    el.onmouseover = (e) => {
+        if (isInteractiveElement(e.target)) {
+            el.style.cursor = 'default'; // Set cursor to default for inputs
+        } else if (e.target === resizeArea) {
+            el.style.cursor = 'nwse-resize'; // Change cursor to resize
+        } else {
+            el.style.cursor = 'move'; // Change cursor to move
+        }
+    };
+
+    el.onmouseout = () => {
+        el.style.cursor = 'move'; // Reset cursor
+    };
 
     function dragMouseDown(e) {
         e.preventDefault();
         pos3 = e.clientX;
-        pos4 = e.client4;
+        pos4 = e.clientY;
         document.onmouseup = closeDragElement;
         document.onmousemove = elementDrag;
     }
 
-    function elementDrag(e) {
+    function resizeMouseDown(e) {
         e.preventDefault();
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
         pos3 = e.clientX;
         pos4 = e.clientY;
-        el.style.top = (el.offsetTop - pos2) + "px";
-        el.style.left = (el.offsetLeft - pos1) + "px";
+        document.onmouseup = closeResizeElement;
+        document.onmousemove = elementResize;
     }
 
-    function closeDragElement () {
+    function elementDrag(e) {
+        if (isDragging) {
+            e.preventDefault();
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            el.style.top = (el.offsetTop - pos2) + "px";
+            el.style.left = (el.offsetLeft - pos1) + "px";
+        }
+    }
+
+    function elementResize(e) {
+        if (isResizing) {
+            e.preventDefault();
+            const newWidth = e.clientX - el.getBoundingClientRect().left + 10; // Added 10 for offset
+            const newHeight = e.clientY - el.getBoundingClientRect().top + 10; // Added 10 for offset
+            el.style.width = newWidth + 'px';
+            el.style.height = newHeight + 'px';
+        }
+    }
+
+    function closeDragElement() {
+        isDragging = false; // Disable dragging
         document.onmouseup = null;
         document.onmousemove = null;
     }
+
+    function closeResizeElement() {
+        isResizing = false; // Disable resizing
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+
+    function isInteractiveElement(target) {
+        // Check if the target is an input, select, or textarea
+        return target.tagName === 'INPUT' || target.tagName === 'SELECT' || target.tagName === 'TEXTAREA';
+    }
 }
+
 
 
 
@@ -529,32 +968,116 @@ document.getElementById('closeButton7').addEventListener('click', function () {
 
 
 function dragElement7(el) {
-    let pos1 = 0 , pos2 = 0 , pos3 = 0 , pos4 = 0;
-    el.onmousedown = dragMouseDown;
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    let isDragging = false;
+    let isResizing = false;
+
+    // Allow dragging only when clicking on the header or an area that is not interactive
+    el.onmousedown = (e) => {
+        if (!isInteractiveElement(e.target) && !isResizing) {
+            isDragging = true;  // Enable dragging
+            dragMouseDown(e);
+        }
+    };
+
+    // Resizing
+    const resizeArea = document.createElement('div');
+    resizeArea.className = 'resize-area'; // Add class for styling
+    resizeArea.style.width = '20px'; // Width of the resize handle
+    resizeArea.style.height = '20px'; // Height of the resize handle
+    resizeArea.style.position = 'absolute';
+    resizeArea.style.bottom = '-10px'; // Move it outside the box
+    resizeArea.style.right = '-10px'; // Move it outside the box
+    resizeArea.style.cursor = 'nwse-resize';
+    el.appendChild(resizeArea);
+
+    resizeArea.onmousedown = (e) => {
+        isResizing = true; // Enable resizing
+        e.stopPropagation(); // Prevent the drag event from firing
+        resizeMouseDown(e);
+    };
+
+    // Disable dragging when mouse is over the resize area
+    el.onmouseover = (e) => {
+        if (isInteractiveElement(e.target)) {
+            el.style.cursor = 'default'; // Set cursor to default for inputs
+        } else if (e.target === resizeArea) {
+            el.style.cursor = 'nwse-resize'; // Change cursor to resize
+        } else {
+            el.style.cursor = 'move'; // Change cursor to move
+        }
+    };
+
+    el.onmouseout = () => {
+        el.style.cursor = 'move'; // Reset cursor
+    };
 
     function dragMouseDown(e) {
         e.preventDefault();
         pos3 = e.clientX;
-        pos4 = e.client4;
+        pos4 = e.clientY;
         document.onmouseup = closeDragElement;
         document.onmousemove = elementDrag;
     }
 
-    function elementDrag(e) {
+    function resizeMouseDown(e) {
         e.preventDefault();
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
         pos3 = e.clientX;
         pos4 = e.clientY;
-        el.style.top = (el.offsetTop - pos2) + "px";
-        el.style.left = (el.offsetLeft - pos1) + "px";
+        document.onmouseup = closeResizeElement;
+        document.onmousemove = elementResize;
     }
 
-    function closeDragElement () {
+    function elementDrag(e) {
+        if (isDragging) {
+            e.preventDefault();
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            el.style.top = (el.offsetTop - pos2) + "px";
+            el.style.left = (el.offsetLeft - pos1) + "px";
+        }
+    }
+
+    function elementResize(e) {
+        if (isResizing) {
+            e.preventDefault();
+            const newWidth = e.clientX - el.getBoundingClientRect().left + 10; // Added 10 for offset
+            const newHeight = e.clientY - el.getBoundingClientRect().top + 10; // Added 10 for offset
+            el.style.width = newWidth + 'px';
+            el.style.height = newHeight + 'px';
+        }
+    }
+
+    function closeDragElement() {
+        isDragging = false; // Disable dragging
         document.onmouseup = null;
         document.onmousemove = null;
     }
+
+    function closeResizeElement() {
+        isResizing = false; // Disable resizing
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+
+    function isInteractiveElement(target) {
+        // Check if the target is an input, select, or textarea
+        return target.tagName === 'INPUT' || target.tagName === 'SELECT' || target.tagName === 'TEXTAREA';
+    }
 }
+
+
+// Helper function to determine if the target element is interactive
+function isInteractiveElement(element) {
+    return element.tagName === 'INPUT' || element.tagName === 'SELECT' || element.tagName === 'TEXTAREA';
+}
+
+
+
+
+
 
 
 
@@ -575,3 +1098,67 @@ function changeBoxColors6() {
 
 
 
+// SCREENSHOT BUTTON SAVE
+
+
+
+document.getElementById("screenshotButton").addEventListener("click", function () {
+    // Use html2canvas to take a screenshot of the body
+    html2canvas(document.body).then(canvas => {
+        // Create a PDF document
+        const { jsPDF } = window.jspdf;
+
+        // Get viewport dimensions
+        const width = window.innerWidth; // Width of the viewport
+        const height = window.innerHeight; // Height of the viewport
+
+        const pdf = new jsPDF({
+            orientation: 'landscape', // or 'landscape'
+            unit: 'px', // Use pixels for units
+            format: [width, height], // Set the format to the size of the viewport
+            hotfixes: [] // Include hotfixes for better rendering
+        });
+
+        // Get the image data URL from the canvas
+        const imgData = canvas.toDataURL("image/png");
+
+        // Add the image to the PDF
+        pdf.addImage(imgData, 'PNG', 0, 0, width, height);
+
+        // Save the PDF
+        pdf.save("SEBASTIAN_SITE.pdf");
+    });
+});
+
+
+
+
+// ZOOM IN & OUT 
+
+
+
+let zoomLevel = 1;
+
+    document.getElementById("zoomInButton")?.addEventListener("click", function () {
+        zoomLevel += 0.1; // Increase zoom level by 0.1
+        document.getElementById("draggableBox").style.transform = `scale(${zoomLevel})`; 
+        document.getElementById("draggableBox1").style.transform = `scale(${zoomLevel})`;
+        document.getElementById("draggableBox3").style.transform = `scale(${zoomLevel})`;
+        document.getElementById("draggableBox4").style.transform = `scale(${zoomLevel})`;
+        document.getElementById("draggableBox5").style.transform = `scale(${zoomLevel})`;
+        document.getElementById("draggableBox6").style.transform = `scale(${zoomLevel})`;
+        document.getElementById("draggableBox7").style.transform = `scale(${zoomLevel})`;
+    });
+
+    document.getElementById("zoomOutButton").addEventListener("click", function () {
+        if (zoomLevel > 0.2) { 
+            zoomLevel -= 0.1; 
+            document.getElementById("draggableBox").style.transform = `scale(${zoomLevel})`; 
+            document.getElementById("draggableBox1").style.transform = `scale(${zoomLevel})`;
+            document.getElementById("draggableBox3").style.transform = `scale(${zoomLevel})`;
+            document.getElementById("draggableBox4").style.transform = `scale(${zoomLevel})`;
+            document.getElementById("draggableBox5").style.transform = `scale(${zoomLevel})`;
+            document.getElementById("draggableBox6").style.transform = `scale(${zoomLevel})`;
+            document.getElementById("draggableBox7").style.transform = `scale(${zoomLevel})`;
+        }
+    });
