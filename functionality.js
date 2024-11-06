@@ -1186,6 +1186,9 @@ let firstDot = null;
     const dot19 = document.getElementById('dot19');
     const dot20 = document.getElementById('dot20');
     const dot21 = document.getElementById('dot21');
+    const dot22 = document.getElementById('dot22');
+    const dot23 = document.getElementById('dot23');
+    const dot24 = document.getElementById('dot24');
     const dotContainer = document.getElementById('container');
 
     // Add click event listener to each dot
@@ -1273,6 +1276,18 @@ let firstDot = null;
       handleDotClick(dot21);
       });
 
+      dot22.addEventListener('click', function() {
+        handleDotClick(dot22);
+      });
+  
+      dot23.addEventListener('click', function() {
+          handleDotClick(dot23);
+        });
+    
+      dot24.addEventListener('click', function() {
+      handleDotClick(dot24);
+      });
+
 
 
     // Function to handle dot click and draw line
@@ -1305,7 +1320,7 @@ let firstDot = null;
         const line = document.createElement('div');
         line.style.position = 'absolute';
         line.style.height = '2px';
-        line.style.backgroundColor = 'black';
+        line.style.backgroundColor = 'gray';
         line.style.zIndex = '1';
         line.style.width = length + 'px';
         line.style.transform = `rotate(${angle}deg)`;
@@ -1315,3 +1330,151 @@ let firstDot = null;
 
       dotContainer.appendChild(line);
     }
+
+
+
+    // KNOWLEDGE BASES
+
+
+    
+// Toggle visibility of draggable box when clicking on mysqlElement
+document.getElementById('knowledgeElement').addEventListener('click', function () {
+    const draggableBox8 = document.getElementById('draggableBox8');
+    draggableBox8.classList.toggle('hidden');
+
+    if (!draggableBox8.classList.contains('hidden')) {
+        dragElement8(draggableBox8); // Initialize dragging functionality
+        toggleEdgeDots(); // Enable edge dots for linking
+    }
+});
+
+// Close button event to hide draggable box
+document.getElementById('closeButton8').addEventListener('click', function () {
+    const draggableBox8 = document.getElementById('draggableBox8');
+    draggableBox8.classList.add('hidden');
+});
+
+// Function to enable dragging and resizing for the draggable box
+function dragElement8(el) {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    let isDragging = false;
+    let isResizing = false;
+
+    // Allow dragging only when clicking on the header or an area that is not interactive
+    el.onmousedown = (e) => {
+        if (!isInteractiveElement(e.target) && !isResizing) {
+            isDragging = true;  // Enable dragging
+            dragMouseDown(e);
+        }
+    };
+
+    // Resizing area setup
+    const resizeArea = document.createElement('div');
+    resizeArea.className = 'resize-area'; // Add class for styling
+    resizeArea.style.width = '20px'; // Width of the resize handle
+    resizeArea.style.height = '20px'; // Height of the resize handle
+    resizeArea.style.position = 'absolute';
+    resizeArea.style.bottom = '-10px'; // Move it outside the box
+    resizeArea.style.right = '-10px'; // Move it outside the box
+    resizeArea.style.cursor = 'nwse-resize';
+    el.appendChild(resizeArea);
+
+    resizeArea.onmousedown = (e) => {
+        isResizing = true; // Enable resizing
+        e.stopPropagation(); // Prevent the drag event from firing
+        resizeMouseDown(e);
+    };
+
+    // Disable dragging when mouse is over the resize area
+    el.onmouseover = (e) => {
+        if (isInteractiveElement(e.target)) {
+            el.style.cursor = 'default'; // Set cursor to default for inputs
+        } else if (e.target === resizeArea) {
+            el.style.cursor = 'nwse-resize'; // Change cursor to resize
+        } else {
+            el.style.cursor = 'move'; // Change cursor to move
+        }
+    };
+
+    el.onmouseout = () => {
+        el.style.cursor = 'move'; // Reset cursor
+    };
+
+    // Dragging logic
+    function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
+
+    // Resizing logic
+    function resizeMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeResizeElement;
+        document.onmousemove = elementResize;
+    }
+
+    // Update position of the element while dragging
+    function elementDrag(e) {
+        if (isDragging) {
+            e.preventDefault();
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            el.style.top = (el.offsetTop - pos2) + "px";
+            el.style.left = (el.offsetLeft - pos1) + "px";
+        }
+    }
+
+    // Update size of the element while resizing
+    function elementResize(e) {
+        if (isResizing) {
+            e.preventDefault();
+            const newWidth = e.clientX - el.getBoundingClientRect().left + 10; // Added 10 for offset
+            const newHeight = e.clientY - el.getBoundingClientRect().top + 10; // Added 10 for offset
+            el.style.width = newWidth + 'px';
+            el.style.height = newHeight + 'px';
+        }
+    }
+
+    // Disable dragging on mouse up
+    function closeDragElement() {
+        isDragging = false; // Disable dragging
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+
+    // Disable resizing on mouse up
+    function closeResizeElement() {
+        isResizing = false; // Disable resizing
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+
+    // Check if the target is an interactive element
+    function isInteractiveElement(target) {
+        return target.tagName === 'INPUT' || target.tagName === 'SELECT' || target.tagName === 'TEXTAREA';
+    }
+}
+
+
+
+function changeBoxColors8() {
+    // Generate random colors in hexadecimal format
+    const randomBorderColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+    // Select the draggable box element
+    const indraggableBox = document.getElementById("indraggableBox8");
+    const draggableBox = document.getElementById("draggableBox8");
+
+    // Change the border color and background color
+    indraggableBox.style.borderColor = randomBorderColor;
+    draggableBox.style.borderColor = randomBorderColor;
+    indraggableBox.style.backgroundColor = randomBorderColor;
+    indraggableBox.style.borderColor = randomBorderColor;
+}
