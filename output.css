@@ -588,6 +588,10 @@ video {
   }
 }
 
+.visible {
+  visibility: visible;
+}
+
 .fixed {
   position: fixed;
 }
@@ -731,6 +735,22 @@ video {
 
 .h-screen {
   height: 100vh;
+}
+
+.h-\[100\%\] {
+  height: 100%;
+}
+
+.h-\[70\%\] {
+  height: 70%;
+}
+
+.h-\[50\%\] {
+  height: 50%;
+}
+
+.h-\[60\%\] {
+  height: 60%;
 }
 
 .w-10 {

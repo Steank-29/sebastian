@@ -167,9 +167,9 @@
 
         
 <!-- Draggable Box -->
-<div id="draggableBox" class="hidden fixed bg-white border rounded-lg " style="width: 200px; height: 250px; top: 40%; left: 40%; transform: translate(-50%, -50%); cursor: move; border-color: #8dc6ff;">
+<div id="draggableBox" class="hidden fixed bg-white border rounded-lg " style="width: 200px; height: 180px; top: 40%; left: 40%; transform: translate(-50%, -50%); cursor: move; border-color: #8dc6ff;">
     <!-- Top Bar -->
-    <div class="draggable-area" style="width: 100%; height: 100%; position: relative;">
+    <div class="draggable-area" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
     <div id="indraggableBox" class="flex items-center justify-between text-white p-2 rounded-t-lg " style="background-color: #8dc6ff;">
         <div class="flex items-center space-x-2">
             <!-- Icon -->
@@ -196,7 +196,7 @@
     </div>
    <!-- Content -->
    <div class="p-4">
-    <textarea class="w-full h-32 p-2 border border-gray-300 rounded resize focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your content here..."></textarea>
+    <textarea class="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your content here..." style=" width: 100%; height: 100%; box-sizing: border-box; overflow: visible;"></textarea>
 </div>
 
 
@@ -231,52 +231,52 @@
             </svg>
         </div>
 
-        <div id="draggableBox1" class="hidden fixed bg-white border rounded-lg shadow-lg" style="width: 200px; height: 250px; top: 50%; left: 50%; transform: translate(-50%, -50%); cursor: move; border-color: #8dc6ff; border-width: 2px;">
+        <div id="draggableBox1" class="hidden fixed bg-white border rounded-lg shadow-lg" style="width: 200px; height: 180px; top: 50%; left: 50%; transform: translate(-50%, -50%); cursor: move; border-color: #8dc6ff; border-width: 2px;">
             <!-- Top Bar -->
-            <div class="draggable-area" style="width: 100%; height: 100%; position: relative;">
-            <div id="indraggableBox1" class="flex items-center justify-between text-white p-2 rounded-t-lg" style="background-color: #8dc6ff;">
-                <div class="flex items-center space-x-2">
-                    <!-- Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-800">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
-                    </svg>
-                    <span class="font-medium text-gray-900">Output</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <!-- Small Title "in1" -->
-                    <span class=" text-sm text-gray-900">out</span>
-                    <!-- Close Button -->
-                    <button onclick="changeBoxColors1()" class="text-gray-900 hover:text-gray-200 ">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
-                        </svg>           
-                    </button>   
-                    <button id="closeButton1" class="text-gray-900 hover:text-gray-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />                     
+            <div class="draggable-area" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
+                <div id="indraggableBox1" class="flex items-center justify-between text-white p-2 rounded-t-lg" style="background-color: #8dc6ff;">
+                    <div class="flex items-center space-x-2">
+                        <!-- Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-800">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
                         </svg>
-                    </button>
+                        <span class="font-medium text-gray-900">Output</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <!-- Small Title "in1" -->
+                        <span class="text-sm text-gray-900">out</span>
+                        <!-- Close Button -->
+                        <button onclick="changeBoxColors1()" class="text-gray-900 hover:text-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                            </svg>           
+                        </button>   
+                        <button id="closeButton1" class="text-gray-900 hover:text-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />                     
+                            </svg>
+                        </button>
+                    </div>
                 </div>
+               <!-- Content -->
+               <div class="p-4">
+                <textarea class="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your content here..." style=" width: 100%; height: 100%; box-sizing: border-box; overflow: visible;"></textarea>
             </div>
-           <!-- Content -->
-           <div class="p-4">
-            <textarea class="w-full h-32 p-2 border border-gray-300 rounded resize focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your content here..."></textarea>
+            
+            <div class="absolute bottom-0 left-0 right-0 flex justify-end items-center h-10 bg-gray-200 rounded-b-lg">
+                <!-- Icon in Bottom Right -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600 mr-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 0 1 1.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.559.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.894.149c-.424.07-.764.383-.929.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 0 1-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.398.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 0 1-.12-1.45l.527-.737c.25-.35.272-.806.108-1.204-.165-.397-.506-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.108-1.204l-.526-.738a1.125 1.125 0 0 1 .12-1.45l.773-.773a1.125 1.125 0 0 1 1.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /> 
+                </svg>
+            </div>
+            
+            </div>
+            <div id="dot16" style="position: absolute; width: 7px; height: 7px; background-color: rgb(36, 36, 36); border-radius: 50%; cursor: pointer; top: 50%; left: -5px; transform: translateY(-50%);"></div>
+            <div id="dot17" style="position: absolute; width: 7px; height: 7px; background-color: rgb(36, 36, 36); border-radius: 50%; cursor: pointer; bottom: -5px; left: 50%; transform: translateX(-50%);"></div>
+            <div id="dot18" style="position: absolute; width: 7px; height: 7px; background-color: rgb(36, 36, 36); border-radius: 50%; cursor: pointer; top: 50%; right: -5px; transform: translateY(-50%);"></div>
         </div>
         
-        <div class="absolute bottom-0 left-0 right-0 flex justify-end items-center h-10 bg-gray-200 rounded-b-lg">
-            <!-- Icon in Bottom Right -->
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600 mr-2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 0 1 1.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.559.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.894.149c-.424.07-.764.383-.929.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 0 1-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.398.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 0 1-.12-1.45l.527-.737c.25-.35.272-.806.108-1.204-.165-.397-.506-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.108-1.204l-.526-.738a1.125 1.125 0 0 1 .12-1.45l.773-.773a1.125 1.125 0 0 1 1.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894Z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /> 
-            </svg>
-        </div>
-        
-        </div>
-        <div id="dot16" style="position: absolute; width: 7px; height: 7px; background-color: rgb(36, 36, 36); border-radius: 50%; cursor: pointer; top: 50%; left: -5px; transform: translateY(-50%);"></div>
-        <div id="dot17" style="position: absolute; width: 7px; height: 7px; background-color: rgb(36, 36, 36); border-radius: 50%; cursor: pointer; bottom: -5px; left: 50%; transform: translateX(-50%);"></div>
-        <div id="dot18" style="position: absolute; width: 7px; height: 7px; background-color: rgb(36, 36, 36); border-radius: 50%; cursor: pointer; top: 50%; right: -5px; transform: translateY(-50%);"></div>
-
-        </div>
 
 
         </div>
@@ -315,7 +315,7 @@
 
         <div  id="draggableBox3" class="hidden fixed bg-white border rounded-lg " style="width: 350px; height: 551px; top: 60%; left: 60%; transform: translate(-50%, -50%); cursor: move; border-color: #09b642; border-width: 2px;">
             <!-- Top Bar -->
-            <div class="draggable-area" style="width: 100%; height: 100%; position: relative;">
+            <div class="draggable-area" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
             <div id="indraggableBox2" class="flex items-center justify-between text-white p-2 rounded-t-lg" style="background-color: #09b642;">
                 <div class="flex items-center space-x-2">
                     <img src="/openai.png" alt="OpenAI Logo" class="w-6 h-6">
@@ -356,7 +356,7 @@
                 <p class="text-sm text-gray-600 mb-2">Set the instructions that guide the AI behavior and give the most satisfiying result you want.</p>
                 
                 <!-- Text Area -->
-                <textarea class="w-full h-24 p-2 border border-gray-300 rounded resize focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Generate a database, schemas and context will come from knowledge bases." value=""> </textarea>
+                <textarea class="w-full h-24 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Generate a database, schemas and context will come from knowledge bases." value="" style="box-sizing: border-box; overflow: visible;" > </textarea>
 
 
                 <h3 class="text-sm font-semibold text-gray-800 mb-1">Prompt</h3>
@@ -365,7 +365,7 @@
                 <p class="text-sm text-gray-600 mb-2">Set the prompt and the inputs that guide the AI behavior and give the most satisfiying result you want once it get outputed.</p>
                 
                 <!-- Text Area -->
-                <textarea class="w-full h-24 p-2 border border-gray-300 rounded resize focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="context : {{kb2}}" value=""> </textarea>
+                <textarea class="w-full h-24 p-2 border border-gray-300 rounded  focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="context : {{kb2}}" value="" style="box-sizing: border-box; overflow: visible;"> </textarea>
 
 
             </div>
@@ -413,7 +413,7 @@
 
         <div  id="draggableBox4" class="hidden fixed bg-white border rounded-lg " style="width: 350px; height: 551px; top: 80%; left: 80%; transform: translate(-50%, -50%); cursor: move; border-color: #b68b09; border-width: 2px;">
             <!-- Top Bar -->
-            <div class="draggable-area" style="width: 100%; height: 100%; position: relative;">
+            <div class="draggable-area" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
             <div id="indraggableBox3" class="flex items-center justify-between text-white p-2 rounded-t-lg" style="background-color: #b68b09;">
                 <div class="flex items-center space-x-2">
                     <img src="/anthropic.png" alt="Anthropic Logo" class="w-6 h-6">
@@ -453,7 +453,7 @@
                 <p class="text-sm text-gray-600 mb-2">Set the instructions that guide the AI behavior and give the most satisfiying result you want.</p>
                 
                 <!-- Text Area -->
-                <textarea class="w-full h-24 p-2 border border-gray-300 rounded resize focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Generate a database, schemas and context will come from knowledge bases." value=""> </textarea>
+                <textarea style="box-sizing: border-box; overflow: visible;" class="w-full h-24 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Generate a database, schemas and context will come from knowledge bases." value=""> </textarea>
 
 
                 <h3 class="text-sm font-semibold text-gray-800 mb-1">Prompt</h3>
@@ -462,7 +462,7 @@
                 <p class="text-sm text-gray-600 mb-2">Set the prompt and the inputs that guide the AI behavior and give the most satisfiying result you want once it get outputed.</p>
                 
                 <!-- Text Area -->
-                <textarea class="w-full h-24 p-2 border border-gray-300 rounded resize focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="context : {{kb2}}" value=""> </textarea>
+                <textarea style="box-sizing: border-box; overflow: visible;" class="w-full h-24 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="context : {{kb2}}" value=""> </textarea>
 
 
             </div>
@@ -513,7 +513,7 @@
 
         <div  id="draggableBox5" class="hidden fixed bg-white border rounded-lg shadow-lg" style="width: 350px; height: 551px; top: 30%; left: 30%; transform: translate(-50%, -50%); cursor: move; border-color: #b609b3; border-width: 2px;">
             <!-- Top Bar -->
-            <div class="draggable-area" style="width: 100%; height: 100%; position: relative;">
+            <div class="draggable-area" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
             <div id="indraggableBox4" class="flex items-center justify-between text-white p-2 rounded-t-lg" style="background-color: #b609b3;">
                 <div class="flex items-center space-x-2">
                     <img src="/llama.png" alt="Llama Logo" class="w-6 h-6">
@@ -553,7 +553,7 @@
                 <p class="text-sm text-gray-600 mb-2">Set the instructions that guide the AI behavior and give the most satisfiying result you want.</p>
                 
                 <!-- Text Area -->
-                <textarea class="w-full h-24 p-2 border border-gray-300 rounded resize focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Generate a database, schemas and context will come from knowledge bases." value=""> </textarea>
+                <textarea style="box-sizing: border-box; overflow: visible;" class="w-full h-24 p-2 border border-gray-300 rounded  focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Generate a database, schemas and context will come from knowledge bases." value=""> </textarea>
     
     
                 <h3 class="text-sm font-semibold text-gray-800 mb-1">Prompt</h3>
@@ -562,7 +562,7 @@
                 <p class="text-sm text-gray-600 mb-2">Set the prompt and the inputs that guide the AI behavior and give the most satisfiying result you want once it get outputed.</p>
                 
                 <!-- Text Area -->
-                <textarea class="w-full h-24 p-2 border border-gray-300 rounded resize focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="context : {{kb2}}" value=""> </textarea>
+                <textarea style="box-sizing: border-box; overflow: visible;" class="w-full h-24 p-2 border border-gray-300 rounded  focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="context : {{kb2}}" value=""> </textarea>
     
     
             </div>
@@ -620,7 +620,7 @@
       </div>
 
       <div id="draggableBox8" class="hidden fixed bg-white border rounded-lg" style="width: 255px; height: 195px; top: 30%; left: 65%; transform: translate(-50%, -50%); border-color: #c01692; border-width: 2px;">
-        <div class="draggable-area" style="width: 100%; height: 100%; position: relative;">
+        <div class="draggable-area" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
             <!-- Top Bar -->
             <div id="indraggableBox8" class="flex items-center justify-between text-white p-2 rounded-t-lg" style="background-color: #c01692;">
                 <div class="flex items-center space-x-2">
@@ -792,7 +792,7 @@
 
    <div id="draggableBox6" class="hidden fixed bg-white border rounded-lg" style="width: 210px; height: 185px; top: 75%; left: 40%; transform: translate(-50%, -50%); cursor: move; border-color: #e840b0; border-width: 2px;">
     <!-- Top Bar -->
-    <div class="draggable-area" style="width: 100%; height: 100%; position: relative;"> <!-- Use relative positioning here -->
+    <div class="draggable-area" style="width: 100%; height: 100%; position: relative; overflow: hidden;"> <!-- Use relative positioning here -->
     <div id="indraggableBox5" class="flex items-center justify-between text-white p-2 rounded-t-lg" style="background-color: #e840b0;">
         <div class="flex items-center space-x-2">
             <img src="/postgres.png" alt="LLaMA AI Logo" class="w-6 h-6">
@@ -862,7 +862,7 @@
 
 
    <div id="draggableBox7" class="hidden fixed bg-white border rounded-lg" style="width: 210px; height: 185px; top: 30%; left: 65%; transform: translate(-50%, -50%); border-color: #a5ac17; border-width: 2px;">
-    <div class="draggable-area" style="width: 100%; height: 100%; position: relative;">
+    <div class="draggable-area" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
         <!-- Top Bar -->
         <div id="indraggableBox6" class="flex items-center justify-between text-white p-2 rounded-t-lg" style="background-color: #a5ac17;">
             <div class="flex items-center space-x-2">
